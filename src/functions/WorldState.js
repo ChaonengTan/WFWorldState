@@ -1,9 +1,7 @@
-export default class WorldState {
-    constructor(platform, location) {
-        this.path = `https://api.warframestat.us/${platform}/${location}`
-    }
-    async start() {
-        const res = await fetch(this.path)
-        return await res.json()
-    }
+export default async function WorldState(platform, location) {
+    const path = `https://api.warframestat.us/${platform}/${location}`
+    const res = await fetch(path)
+    const json = await res.json()
+    return json.cod!==200 ? {cod:json.cod, message:json.message} : await json
+    
 }
