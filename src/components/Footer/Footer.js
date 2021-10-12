@@ -2,7 +2,7 @@
 
 function Footer() {
     return (
-      <div className="navbar">
+      <div className="footer">
         Github
       </div>
     );
