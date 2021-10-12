@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import WorldState from "../../functions/WorldState";
 // import './WFWorldState.css';
 
@@ -12,7 +12,9 @@ function WFWorldState() {
             cambion: await WorldState('pc', 'cambionCycle'),
         })
     }
-    getData()
+    useEffect(() => {
+        getData()
+    }, []);
     return (
         <div className="wfWorldState">
             {data ?
