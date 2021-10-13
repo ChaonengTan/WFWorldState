@@ -11,13 +11,47 @@ function WFWorldState() {
         const vallis = await WorldState('pc', 'vallisCycle')
         const cambion = await WorldState('pc', 'cambionCycle')
         Promise.all([earth, cetus, vallis, cambion]).then(() => {
+            cambion.timeLeft = cetus.timeLeft
+        }).then(() => {
+            [earth, cetus, vallis, cambion].forEach(loc => {
+                const currentTime = new Date().getSeconds()
+                const timeLeftArr = loc.timeLeft.split(' ').map(time => {
+                    return time.match(/\d/g).join('')
+                }).reverse()
+                console.log(`${loc.id}: `+timeLeftArr)
+                switch(timeLeftArr.length) {
+                    case 1:
+                        timeLeftArr[0] = timeLeftArr[0]-currentTime
+                        break
+                    case 2:
+                        if (timeLeftArr[0]-currentTime<0) {
+                            timeLeftArr[1]-=1
+                            timeLeftArr[0]+=60
+                        }
+                        timeLeftArr[0] = timeLeftArr[0]-currentTime
+                        break
+                    case 3:
+                        if (timeLeftArr[0]-currentTime<0) {
+                            if (timeLeftArr[1]-1<0) {
+                                timeLeftArr[2]-=1
+                                timeLeftArr[1]+=60
+                            }
+                            timeLeftArr[1]-=1
+                            timeLeftArr[0]+=60
+                        }
+                        timeLeftArr[0] = timeLeftArr[0]-currentTime
+                        break
+                }
+                console.log(`${loc.id}|POST: `+timeLeftArr)
+            })
+        }).then(() => {
             setData({earth,cetus,vallis,cambion})
         })
     }
-    useInterval(getData, 1000)
-    // useEffect(() => {
-    //     getData()
-    // }, []);
+    // useInterval(getData, 1000)
+    useEffect(() => {
+        getData()
+    }, []);
     console.log(data)
     return (
         <div>
@@ -43,7 +77,7 @@ function WFWorldState() {
                 <div className='cambion'>
                     cambionDrift:
                     {data.cambion.active}
-                    {/* {data.cambion.timeLeft} */}
+                    {data.cambion.timeLeft}
                 </div>
             </div> :
             <div className='loading'>Fetching Data</div>
