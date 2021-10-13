@@ -1,9 +1,10 @@
-// import './Footer.css';
+import './footer.css';
+import githubIcon from '../../static/images/githubIcon.png'
 
 function Footer() {
     return (
       <div className="footer">
-        Github
+        <a><img src={githubIcon}></img></a>
       </div>
     );
   }

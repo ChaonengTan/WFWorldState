@@ -1,0 +1,24 @@
+.footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  position: absolute;
+  width: 100%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+}
+
+.footer img {
+  max-height: 4vh;
+  width: auto;
+  margin: .2rem;
+}
+/*# sourceMappingURL=footer.css.map */

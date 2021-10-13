@@ -1,0 +1,15 @@
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    position: absolute;
+    width: 100%;
+    color: white;
+    background-color: rgba($color: #000000, $alpha: .5);
+    bottom: 0;
+    img {
+        max-height: 4vh;
+        width: auto;
+        margin: .2rem;
+    }
+}
