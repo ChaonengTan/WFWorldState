@@ -1,41 +1,52 @@
 import { useState, useEffect } from 'react'
 import WorldState from "../../functions/WorldState";
-// import './WFWorldState.css';
+import useInterval from '../../functions/useInterval';
+import './WFWorldState.css';
 
 function WFWorldState() {
     const [data, setData] = useState(null)
     async function getData() {
-        await setData({
-            earth: await WorldState('pc', 'earthCycle'),
-            cetus: await WorldState('pc', 'cetusCycle'),
-            vallis: await WorldState('pc', 'vallisCycle'),
-            cambion: await WorldState('pc', 'cambionCycle'),
+        const earth = await WorldState('pc', 'earthCycle')
+        const cetus = await WorldState('pc', 'cetusCycle')
+        const vallis = await WorldState('pc', 'vallisCycle')
+        const cambion = await WorldState('pc', 'cambionCycle')
+        Promise.all([earth, cetus, vallis, cambion]).then(() => {
+            setData({earth,cetus,vallis,cambion})
         })
     }
-    useEffect(() => {
-        getData()
-    }, []);
+    useInterval(getData, 1000)
+    // useEffect(() => {
+    //     getData()
+    // }, []);
+    console.log(data)
     return (
-        <div className="wfWorldState">
+        <div>
             {data ?
-            <div>
+            <div className="wfWorldState">
                 <div className='earth'>
-                    {data.earth.state}
-                    {data.earth.timeLeft}
-
-                    {data.cetus.state}
-                    {data.cetus.timeLeft}
+                    <div>
+                        earth:
+                        {data.earth.state}
+                        {data.earth.timeLeft}
+                    </div>
+                    <div>
+                        cetus:
+                        {data.cetus.state}
+                        {data.cetus.timeLeft}
+                    </div>
                 </div>
                 <div className='vallis'>
+                    orbVallis:
                     {data.vallis.state}
                     {data.vallis.timeLeft}
                 </div>
                 <div className='cambion'>
-                    {data.cambion.state}
-                    {data.cambion.timeLeft}
+                    cambionDrift:
+                    {data.cambion.active}
+                    {/* {data.cambion.timeLeft} */}
                 </div>
             </div> :
-            `fetching data`
+            <div className='loading'>Fetching Data</div>
             }
         </div>
     );
