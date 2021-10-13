@@ -1,23 +1,21 @@
 .wfWorldState {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
   -ms-flex-pack: distribute;
       justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
   color: white;
+  font-size: 2rem;
   height: 100vh;
   width: 100%;
+  z-index: 1;
 }
 
-.wfWorldState .earth {
+.wfWorldState > * {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -25,5 +23,44 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.wfWorldState .earth {
+  background-image: url("../../static/images/PoE.jpeg");
+}
+
+.wfWorldState .vallis {
+  background-image: url("../../static/images/OV.jpeg");
+}
+
+.wfWorldState .cambion {
+  background-image: url("../../static/images/CD.jpeg");
+}
+
+.loading {
+  height: 100vh;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 2rem;
+  background-color: black;
+  color: white;
 }
 /*# sourceMappingURL=WFWorldState.css.map */
