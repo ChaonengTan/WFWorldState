@@ -18,31 +18,32 @@ function WFWorldState() {
                 const timeLeftArr = loc.timeLeft.split(' ').map(time => {
                     return time.match(/\d/g).join('')
                 }).reverse()
-                console.log(`${loc.id}: `+timeLeftArr)
+                // console.log(`${loc.id}: `+timeLeftArr)
                 switch(timeLeftArr.length) {
                     case 1:
                         timeLeftArr[0] = timeLeftArr[0]-currentTime
                         break
                     case 2:
                         if (timeLeftArr[0]-currentTime<0) {
-                            timeLeftArr[1]-=1
-                            timeLeftArr[0]+=60
+                            timeLeftArr[1] = timeLeftArr[1]-1
+                            timeLeftArr[0] = parseInt(timeLeftArr[0])+60
                         }
                         timeLeftArr[0] = timeLeftArr[0]-currentTime
                         break
                     case 3:
                         if (timeLeftArr[0]-currentTime<0) {
                             if (timeLeftArr[1]-1<0) {
-                                timeLeftArr[2]-=1
-                                timeLeftArr[1]+=60
+                                timeLeftArr[2] = timeLeftArr[2]-1
+                                timeLeftArr[1] = parseInt(timeLeftArr[1])+60
                             }
-                            timeLeftArr[1]-=1
-                            timeLeftArr[0]+=60
+                            timeLeftArr[1] = timeLeftArr[1]-1
+                            timeLeftArr[0] = parseInt(timeLeftArr[0])+60
                         }
                         timeLeftArr[0] = timeLeftArr[0]-currentTime
                         break
                 }
-                console.log(`${loc.id}|POST: `+timeLeftArr)
+                // console.log(`${loc.id}|POST: `+timeLeftArr)
+                loc.timeLeft = timeLeftArr.reverse()
             })
         }).then(() => {
             setData({earth,cetus,vallis,cambion})
@@ -57,6 +58,28 @@ function WFWorldState() {
         <div>
             {data ?
             <div className="wfWorldState">
+                {/* <div className='earth'>
+                    <div>
+                        earth:
+                        {data.earth.state}
+                        {data.earth.timeLeft}
+                    </div>
+                    <div>
+                        cetus:
+                        {data.cetus.state}
+                        {data.cetus.timeLeft}
+                    </div>
+                </div>
+                <div className='vallis'>
+                    orbVallis:
+                    {data.vallis.state}
+                    {data.vallis.timeLeft}
+                </div>
+                <div className='cambion'>
+                    cambionDrift:
+                    {data.cambion.active}
+                    {data.cambion.timeLeft}
+                </div> */}
                 <div className='earth'>
                     <div>
                         earth:
