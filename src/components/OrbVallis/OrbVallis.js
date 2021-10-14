@@ -13,7 +13,7 @@ function OrbVallis() {
     return (
         <div>
             {vallis ?
-            <div className="worldState">
+            <div className="wfWorldState worldState">
                 <div className='vallis'>
                     <div>Orb Vallis | {vallis.state}</div>
                     {parseTime(vallis.timeLeft)}
