@@ -14,36 +14,10 @@ function WFWorldState() {
             cambion.timeLeft = cetus.timeLeft
         }).then(() => {
             [earth, cetus, vallis, cambion].forEach(loc => {
-                const currentTime = new Date().getSeconds()
-                const timeLeftArr = loc.timeLeft.split(' ').map(time => {
-                    return time.match(/\d/g).join('')
-                }).reverse()
-                // console.log(`${loc.id}: `+timeLeftArr)
-                switch(timeLeftArr.length) {
-                    case 1:
-                        timeLeftArr[0] = timeLeftArr[0]-currentTime
-                        break
-                    case 2:
-                        if (timeLeftArr[0]-currentTime<0) {
-                            timeLeftArr[1] = timeLeftArr[1]-1
-                            timeLeftArr[0] = parseInt(timeLeftArr[0])+60
-                        }
-                        timeLeftArr[0] = timeLeftArr[0]-currentTime
-                        break
-                    case 3:
-                        if (timeLeftArr[0]-currentTime<0) {
-                            if (timeLeftArr[1]-1<0) {
-                                timeLeftArr[2] = timeLeftArr[2]-1
-                                timeLeftArr[1] = parseInt(timeLeftArr[1])+60
-                            }
-                            timeLeftArr[1] = timeLeftArr[1]-1
-                            timeLeftArr[0] = parseInt(timeLeftArr[0])+60
-                        }
-                        timeLeftArr[0] = timeLeftArr[0]-currentTime
-                        break
-                }
-                // console.log(`${loc.id}|POST: `+timeLeftArr)
-                loc.timeLeft = timeLeftArr.reverse()
+                const currentTime = new Date()
+                const expTime = new Date(loc.expiry)
+                loc.timeLeft = (expTime-currentTime)/1000
+                // console.log(`difference: ${(expTime-currentTime)/1000}s`)
             })
         }).then(() => {
             setData({earth,cetus,vallis,cambion})
@@ -54,12 +28,10 @@ function WFWorldState() {
         getData()
     }, []);
     console.log(data)
-    function displayTime(timeArr) {
+    function parseTime(timeLeft) {
         return (
             <div>
-                {timeArr.length === 3 && <div>{timeArr[0]}h {timeArr[1]}m {timeArr[2]}s</div>}
-                {timeArr.length === 2 && <div>{timeArr[0]}m {timeArr[1]}s</div>}
-                {timeArr.length === 1 && <div>{timeArr[0]}s</div>}
+                {Math.floor(timeLeft/3600)}h {Math.floor((timeLeft%3600)/60)}m {Math.floor(timeLeft%60)}s
             </div>
         )
     }
@@ -71,23 +43,23 @@ function WFWorldState() {
                     <div>
                         earth:
                         {data.earth.state}
-                        {displayTime(data.earth.timeLeft)}
+                        {parseTime(data.earth.timeLeft)}
                     </div>
                     <div>
                         cetus:
                         {data.cetus.state}
-                        {displayTime(data.cetus.timeLeft)}
+                        {parseTime(data.cetus.timeLeft)}
                     </div>
                 </div>
                 <div className='vallis'>
                     orbVallis:
                     {data.vallis.state}
-                    {displayTime(data.vallis.timeLeft)}
+                    {parseTime(data.vallis.timeLeft)}
                 </div>
                 <div className='cambion'>
                     cambionDrift:
                     {data.cambion.active}
-                    {displayTime(data.cambion.timeLeft)}
+                    {parseTime(data.cambion.timeLeft)}
                 </div>
             </div> :
             <div className='loading'>Fetching Data</div>
