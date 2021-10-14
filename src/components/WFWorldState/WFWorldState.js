@@ -1,23 +1,16 @@
 import { useState } from 'react'
-import { WorldState, getAllData} from "../../functions/WorldState";
+import { getAllData } from "../../functions/WorldState";
 import useInterval from '../../functions/useInterval';
+import parseTime from '../parseTime';
 import './WFWorldState.css';
 
 function WFWorldState() {
     const [data, setData] = useState(null)
-    
     useInterval(() => {getAllData(setData)}, 1000)
     // useEffect(() => {
     //     getAllData()
     // }, []);
     // console.log(data)
-    function parseTime(timeLeft) {
-        return (
-            <div>
-                {Math.floor(timeLeft/3600)}h {Math.floor((timeLeft%3600)/60)}m {Math.floor(timeLeft%60)}s
-            </div>
-        )
-    }
     return (
         <div>
             {data ?
