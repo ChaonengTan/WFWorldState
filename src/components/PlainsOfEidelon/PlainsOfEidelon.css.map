@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,aAAa,CAAC;EACV,qBAAqB,EAAE,GAAG;CAC7B",
+    "mappings": "AAAA,AAAA,WAAW,CAAC;EACR,qBAAqB,EAAE,GAAG;CAC7B",
     "sources": [
         "PlainsOfEidelon.scss"
     ],

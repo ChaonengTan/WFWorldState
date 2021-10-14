@@ -15,7 +15,7 @@ function PlainsOfEidelon() {
     return (
         <div>
             {earth && cetus ?
-            <div className="wfWorldState">
+            <div className="worldState">
                 <div className='earth'>
                     <div>
                         <div>Earth | {earth.state}</div>
