@@ -20,6 +20,11 @@
     }
     .earth {
         background-image: url('../../static/images/PoE.jpeg');
+        &>* {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     }
     .vallis {
         background-image: url('../../static/images/OV.jpeg');
