@@ -54,53 +54,40 @@ function WFWorldState() {
         getData()
     }, []);
     console.log(data)
+    function displayTime(timeArr) {
+        return (
+            <div>
+                {timeArr.length === 3 && <div>{timeArr[0]}h {timeArr[1]}m {timeArr[2]}s</div>}
+                {timeArr.length === 2 && <div>{timeArr[0]}m {timeArr[1]}s</div>}
+                {timeArr.length === 1 && <div>{timeArr[0]}s</div>}
+            </div>
+        )
+    }
     return (
         <div>
             {data ?
             <div className="wfWorldState">
-                {/* <div className='earth'>
-                    <div>
-                        earth:
-                        {data.earth.state}
-                        {data.earth.timeLeft}
-                    </div>
-                    <div>
-                        cetus:
-                        {data.cetus.state}
-                        {data.cetus.timeLeft}
-                    </div>
-                </div>
-                <div className='vallis'>
-                    orbVallis:
-                    {data.vallis.state}
-                    {data.vallis.timeLeft}
-                </div>
-                <div className='cambion'>
-                    cambionDrift:
-                    {data.cambion.active}
-                    {data.cambion.timeLeft}
-                </div> */}
                 <div className='earth'>
                     <div>
                         earth:
                         {data.earth.state}
-                        {data.earth.timeLeft}
+                        {displayTime(data.earth.timeLeft)}
                     </div>
                     <div>
                         cetus:
                         {data.cetus.state}
-                        {data.cetus.timeLeft}
+                        {displayTime(data.cetus.timeLeft)}
                     </div>
                 </div>
                 <div className='vallis'>
                     orbVallis:
                     {data.vallis.state}
-                    {data.vallis.timeLeft}
+                    {displayTime(data.vallis.timeLeft)}
                 </div>
                 <div className='cambion'>
                     cambionDrift:
                     {data.cambion.active}
-                    {data.cambion.timeLeft}
+                    {displayTime(data.cambion.timeLeft)}
                 </div>
             </div> :
             <div className='loading'>Fetching Data</div>
