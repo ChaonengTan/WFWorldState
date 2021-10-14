@@ -29,7 +29,7 @@ async function getAllData(setData) {
 }
 async function getData(setData, loc) {
     const location = await WorldState('pc', `${loc}Cycle`)
-    Promise(location).then(() => {
+    Promise.all([location]).then(() => {
         // Manually calculates time left from expiryTime-currentTime
         const currentTime = new Date()
         const expTime = new Date(location.expiry)
