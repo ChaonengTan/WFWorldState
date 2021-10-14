@@ -4,7 +4,7 @@
 
 ## What is WFWorldState
 
-WFWorldState shows the time remaining from open world nodes in the game Warframe.
+WFWorldState shows the time remaining from open world nodes in the game Warframe.\
 This application uses the WarframeAPI listed [HERE](https://docs.warframestat.us/)
 
 ## How to run
@@ -13,9 +13,9 @@ Site is hosted on Github, check it out [HERE](https://chaonengtan.github.io/WFWo
 
 or
 
-Install the application
-`.. cd WFWorldState`
-`npm install`
+Install the application\
+`.. cd WFWorldState`\
+`npm install`\
 `npm start` or `yarn start`
 
 
