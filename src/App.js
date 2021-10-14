@@ -4,6 +4,7 @@ import Footer from './components/Footer/Footer'
 import WFWorldState from './components/WFWorldState/WFWorldState';
 import PlainsOfEidelon from './components/PlainsOfEidelon/PlainsOfEidelon';
 import OrbVallis from './components/OrbVallis/OrbVallis';
+import CambionDrift from './components/CambionDrift/CambionDrift';
 import './App.css';
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
         <Route exact path="/" component={WFWorldState}/>
         <Route path="/PoE" component={PlainsOfEidelon}/>
         <Route path="/OV" component={OrbVallis}/>
-        {/* <Route path="/CD" component={CambionDrift}/> */}
+        <Route path="/CD" component={CambionDrift}/>
         <Footer/>
       </div>
     </Router>
