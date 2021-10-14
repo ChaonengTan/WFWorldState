@@ -13,7 +13,7 @@ function CambionDrift() {
     return (
         <div>
             {cambion ?
-            <div className="wfWorldState">
+            <div className="worldState">
                 <div className='cambion'>
                     <div>Cambion Drift | {cambion.active}</div>
                     {parseTime(cambion.timeLeft)}
