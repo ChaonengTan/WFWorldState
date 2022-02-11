@@ -8,11 +8,10 @@ async function WorldState(platform, location) {
                 query {
                     getWorldstate(location: ${location}) {
                         state
-                        timeLeft
+                        expiry
                     }
                 }`
         })
-        console.log(json.data.getWorldstate.timeLeft)
         return json.data.getWorldstate
     } catch(err) {
         return err.message
