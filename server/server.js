@@ -4,6 +4,7 @@ const { graphqlHTTP } = require('express-graphql')
 const { buildSchema } = require('graphql')
 const fetch = require('node-fetch')
 const { GraphQLJSON, GraphQLJSONObject } = require('graphql-type-json');
+const cors = require('cors')
 
 // schema
 const schema = buildSchema(`
