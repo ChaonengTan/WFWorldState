@@ -9,26 +9,43 @@ const cors = require('cors')
 // schema
 const schema = buildSchema(`
     scalar JSON
-    type WorldState {
-        earth: JSON
-        cetus: JSON
-        cambion: JSON
-        vallis: JSON
+    type Worldstate {
+        activation: String!
+        expiry: String!
+        id: String!
+        state: String!
+        timeLeft: Float!
+    }
+    enum WFLocation {
+        cetusCycle
+        earthCycle
+        vallisCycle
+        cambionCycle
     }
     type Query {
-        getWF: WorldState!
+        getWorldstate(location: WFLocation!): Worldstate!
     }
 `)
 
 // resolvers
 const root = {
-    getWF: async () => {
-        const url = place => `https://api.warframestat.us/pc/${place}`
-        const earthUrl = url('earthCycle'), cetusUrl = url('vallisCycle'), cambionUrl = url('cambionCycle'), vallisUrl = url('vallisCycle')
-        const earthRes = await fetch(earthUrl), cetusRes = await fetch(cetusUrl), cambionRes = await fetch(cambionUrl), vallisRes = await fetch(vallisUrl)
-        const earth = await earthRes.json(), cetus = await cetusRes.json(), cambion = await cambionRes.json(), vallis = await vallisRes.json()
-        // console.log(json)
-        return { earth, cetus, cambion, vallis }
+    getWorldstate: async (location) => {
+        // fetch
+        const url = (location) => `https://api.warframestat.us/pc/${location.location}`
+        const res = await fetch(url(location))
+        const json = await res.json()
+
+        // standard returns
+        const activation = json.activation
+        const expiry = json.expiry
+        const id = json.id
+        const state = json.state ? json.state : json.active
+
+        // timeLeft
+        const currentTime = new Date()
+        const expTime = new Date(expiry)
+        const timeLeft = (expTime-currentTime)/1000
+        return { activation, expiry, id, state, timeLeft }
     }
 }
 
