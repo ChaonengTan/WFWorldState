@@ -6,11 +6,10 @@ import './WFWorldState.css';
 
 function WFWorldState() {
     const [data, setData] = useState(null)
-    useInterval(() => {getAllData(setData)}, 1000)
-    // useEffect(() => {
-    //     getAllData()
-    // }, []);
-    // console.log(data)
+    useInterval(() => {
+        getAllData(setData)
+        console.log(data)
+    }, 1000)
     return (
         <div>
             {data ?
