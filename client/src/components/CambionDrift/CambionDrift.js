@@ -1,9 +1,8 @@
+import { useQuery } from '@apollo/client'
+import GetWorldState from '../../functions/queries/WorldStateQuery'
 import parseTime from '../parseTime';
 import '../WFWorldState/WFWorldState.css'
 import '../PlainsOfEidelon/PlainsOfEidelon.css';
-
-import { useQuery } from '@apollo/client'
-import GetWorldState from '../../functions/queries/WorldStateQuery'
 
 export default function CambionDrift() {
     const { data } = useQuery(
