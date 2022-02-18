@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
 
 export default gql`
-query GetWorldState($location: String!) {
+query GetWorldState($location: WFLocation!) {
     getWorldstate(location: $location) {
         state
-        expiry
+        timeLeft
     }
 }`
