@@ -1,32 +1,24 @@
-import { useState } from 'react'
-import { getData } from "../../functions/WorldState";
-import useInterval from '../../functions/useInterval';
+import { useQuery } from '@apollo/client'
+import GetWorldState from '../../functions/queries/WorldStateQuery'
 import parseTime from '../parseTime';
-import timeLeft from '../timeLeft';
 import '../WFWorldState/WFWorldState.css'
 import './PlainsOfEidelon.css';
 
 function PlainsOfEidelon() {
-    const [earth, setEarth] = useState(null)
-    const [cetus, setCetus] = useState(null)
-    const [, updateState] = useState(null)
-    useInterval(() => {
-        getData(setEarth, `earth`)
-        getData(setCetus, `cetus`)
-        updateState({})
-    }, 1000)
+    const { data: earthData } = useQuery(GetWorldState, { variables: { location: 'earthCycle'}, pollInterval: 1000 })
+    const { data: cetusData } = useQuery(GetWorldState, { variables: { location: 'cetusCycle'}, pollInterval: 1000 })
     return (
         <div>
-            {earth && cetus ?
+            {earthData && cetusData ?
             <div className="wfWorldState worldState">
                 <div className='earth'>
                     <div>
-                        <div>Earth | {earth.state}</div>
-                        {parseTime(timeLeft(earth.expiry))}
+                        <div>Earth | {earthData.getWorldstate.state}</div>
+                        {parseTime(earthData.getWorldstate.timeLeft)}
                     </div>
                     <div>
-                        <div>Cetus | {cetus.state}</div>
-                        {parseTime(timeLeft(cetus.expiry))}
+                        <div>Cetus | {cetusData.getWorldstate.state}</div>
+                        {parseTime(cetusData.getWorldstate.timeLeft)}
                     </div>
                 </div>
             </div> :
