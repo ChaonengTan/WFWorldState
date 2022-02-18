@@ -1,25 +1,24 @@
-import { useState } from 'react'
-import { getData } from "../../functions/WorldState";
-import useInterval from '../../functions/useInterval';
+import { useQuery } from '@apollo/client'
+import GetWorldState from '../../functions/queries/WorldStateQuery'
 import parseTime from '../parseTime';
-import timeLeft from '../timeLeft';
 import '../WFWorldState/WFWorldState.css'
 import '../PlainsOfEidelon/PlainsOfEidelon.css';
 
-function OrbVallis() {
-    const [vallis, setVallis] = useState(null)
-    const [, updateState] = useState(null)
-    useInterval(() => {
-        getData(setVallis, `vallis`)
-        updateState({})
-    }, 1000)
+export default function OrbVallis() {
+    const { data } = useQuery(
+        GetWorldState,
+        { 
+          variables: { location: 'vallisCycle'},
+          pollInterval: 1000
+        }
+    )
     return (
         <div>
-            {vallis ?
+            {data ?
             <div className="wfWorldState worldState">
                 <div className='vallis'>
-                    <div>Orb Vallis | {vallis.state}</div>
-                    {parseTime(timeLeft(vallis.expiry))}
+                    <div>Orb Vallis | {data.getWorldstate.state}</div>
+                    {parseTime(data.getWorldstate.timeLeft)}
                 </div>
             </div> :
             <div className='loading'>Fetching Data</div>
@@ -27,5 +26,3 @@ function OrbVallis() {
         </div>
     );
 }
-
-export default OrbVallis;
