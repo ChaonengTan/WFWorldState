@@ -53,7 +53,7 @@ const root = {
 
 // app
 const app = express()
-
+app.use(express.static(path.join(__dirname, "client", "build")))
 app.use(cors())
 // route
 app.use('/graphql', graphqlHTTP({
@@ -63,7 +63,10 @@ app.use('/graphql', graphqlHTTP({
 }))
 
 // start
-const port = 4000
+const port = process.env.PORT || 4000 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+})
 app.listen(port, () => {
     console.log('Running on port:'+port)
     console.log(`http://localhost:${port}/graphql`)
