@@ -69,5 +69,6 @@ app.get("*", (req, res) => {
 })
 app.listen(port, () => {
     console.log('Running on port:'+port)
+    console.log('process port is:'+process.env.PORT)
     console.log(`http://localhost:${port}/graphql`)
 })
