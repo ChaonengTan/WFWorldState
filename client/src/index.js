@@ -8,13 +8,17 @@ import { ApolloProvider, InMemoryCache, ApolloClient, split, HttpLink } from '@a
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
 
+const dotenv = require('dotenv')
+dotenv.config({ path: '../' })
+const port = process.env.PORT || 8000
+
 // Used for Query and Mutation Queries
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/graphql'
+  uri: `http://localhost:${port}/graphql`
 });
 // Use for Subscription Queries
 const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:4000/graphql',
+  uri: `ws://localhost:${port}/graphql`,
     options: {
     reconnect: true
   }
