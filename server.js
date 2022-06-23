@@ -5,6 +5,8 @@ const { buildSchema } = require('graphql')
 const fetch = require('node-fetch')
 const { GraphQLJSON, GraphQLJSONObject } = require('graphql-type-json');
 const cors = require('cors')
+const path = require('path')
+require('dotenv').config()
 
 // schema
 const schema = buildSchema(`
